@@ -31,6 +31,12 @@
         <form action = "/esercizio6" method="get">
             <input type = "text" name = "tasso"> inserisci un tasso di conversione<br><br>
             <input type = "submit" value = "esercizio6">
+        </form><br><br>
+        <form action = "/variante" method="get">
+            {%for quaa in lista%}
+                <input type = "checkbox" name = "zona2" value = "{{quaa}}"> {{quaa}}<br><br>
+            {%endfor%}
+            <input type = "submit" value = "variante">
         </form>
     </body>
 </html>
