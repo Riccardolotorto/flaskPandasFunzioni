@@ -8,6 +8,9 @@
     </head>
     <body>
         {{tabella|safe}}
-        {{lista}}
+        {%for q in lista%}
+            <p>{{q}}</p>
+        {%endfor%}
+        {{prezzo}}
     </body>
 </html>

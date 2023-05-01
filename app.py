@@ -32,7 +32,7 @@ def esercizio4():
     zona = request.args.get("zona")
     dfZona = df[df["neighborhood"].str.contains(zona, na = False)]
     prezzo_medio = round(dfZona["price"].mean(), 0)
-    return render_template("risultato.html", lista = prezzo_medio)
+    return render_template("risultato.html", prezzo = prezzo_medio)
 
 @app.route('/esercizio5')
 def esercizio5():
@@ -45,8 +45,11 @@ def esercizio6():
     def conversione(euro, tasso):
         return euro * tasso
     d = df.groupby("neighborhood")[["price"]].mean().sort_values("price", ascending = False).reset_index().dropna()
-    dfAltraValuta = conversione(d[["price"]].dropna(), tasso).to_html()
-    return render_template("risultato.html", tabella = dfAltraValuta)
+    dfAltraValuta = conversione(d[["price"]].dropna(), tasso)
+    dfAltraValutaTesti = d[["neighborhood"]].dropna()
+    dff = [dfAltraValutaTesti, dfAltraValuta]
+    result = pd.concat(dff, axis = 1).to_html()
+    return render_template("risultato.html", tabella = result)
 
 @app.route('/variante', methods = ["GET"])
 def variante():
